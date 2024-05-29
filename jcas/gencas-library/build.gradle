@@ -82,8 +82,9 @@ task releaseJar(type: Jar) {
     from(project.zipTree("${gradle.ext.outputDir}/${JCasWidevineJarName}.jar"))
     from(project.zipTree("${gradle.ext.outputDir}/${SiPsiJarName}.jar"))
     from(project.zipTree("${gradle.ext.outputDir}/${TunerJarName}.jar"))
-    from(project.zipTree("${gradle.ext.outputDir}/${DtvCommonJarName}.jar"))
+    from(project.zipTree("${gradle.ext.outputDir}/${CommonJarName}.jar"))
     from(project.zipTree("${gradle.ext.outputDir}/${GsonJarName}.jar"))
+    from(project.zipTree("${gradle.ext.outputDir}/${DvrJarName}.jar"))
     getDestinationDirectory().set(getProject().file(genJarDir))
 }
 
