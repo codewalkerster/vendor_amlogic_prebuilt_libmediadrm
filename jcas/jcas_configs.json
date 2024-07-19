@@ -3,7 +3,9 @@
   "soc": "amlogic",
   "cas": {
     "casWrapperToHandleEcmFilters": false,
-    "useCasWrapperCache": true,
+    "useCasWrapperCache": false,
+    "useReEncryption": true,
+    "useSingleMetadata": true,
     "provisionUrl": "default",
     "provisionKey": "default",
     "licenseUrl": "default"
