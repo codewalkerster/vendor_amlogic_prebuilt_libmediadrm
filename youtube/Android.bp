@@ -1,0 +1,79 @@
+// *** THIS PACKAGE HAS SPECIAL LICENSING CONDITIONS.  PLEASE
+//     CONSULT THE OWNERS AND opensource-licensing@google.com BEFORE
+//     DEPENDING ON IT IN YOUR PROJECT. ***
+package {
+    // See: http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // all of the 'license_kinds' from "vendor_amlogic_common_license"
+    // to get the below license kinds:
+    //   SPDX-license-identifier-Apache-2.0
+    //   SPDX-license-identifier-BSD
+    //   SPDX-license-identifier-LGPL
+    //   legacy_by_exception_only (by exception only)
+    //   legacy_proprietary
+    default_applicable_licenses: ["vendor_amlogic_common_license"],
+}
+
+bootstrap_go_package {
+    name: "soong-youtube_service",
+    pkgPath: "android/soong/vendor/amlogic/common/prebuilt/libmediadrm/youtube",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+        "soong-tee_common"
+    ],
+    srcs: [
+        "youtube_service.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+libyoutubeplugin_aidl_go_defaults {
+    name: "libyoutubeplugin_aidl_bp_module",
+}
+youtube_service_go_defaults {
+    name: "youtube_service_bp_module",
+}
+
+cc_prebuilt_library_shared {
+    name: "libyoutubeplugin_aidl",
+    compile_multilib: "both",
+    proprietary: true,
+    defaults: ["libyoutubeplugin_aidl_bp_module"],
+    strip: {
+        none: true,
+    },
+
+    shared_libs: [
+        "android.hardware.drm-V1-ndk",
+        "libbase",
+        "libbinder",
+        "libbinder_ndk",
+        "libc++",
+        "liblog",
+        "libcrypto",
+        "libutils",
+        "libcutils",
+        "libteec",
+        "libstagefright_foundation"
+    ],
+}
+
+cc_prebuilt_binary {
+    name: "android.hardware.drm-service.youtube",
+    defaults: ["youtube_service_bp_module"],
+    vendor: true,
+    init_rc: ["android.hardware.drm-service.youtube.rc"],
+    vintf_fragments: ["manifest_android.hardware.drm-service.youtube.xml"],
+    relative_install_path: "hw",
+    shared_libs: [
+        "android.hardware.drm-V1-ndk",
+        "libbase",
+        "libbinder_ndk",
+        "libyoutubeplugin_aidl",
+    ],
+}

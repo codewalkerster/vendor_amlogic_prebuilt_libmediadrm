@@ -1,0 +1,7 @@
+service vendor.drm-youtube-service /vendor/bin/hw/android.hardware.drm-service.youtube
+    interface aidl android.hardware.drm.IDrmFactory/youtube
+    class hal
+    user media
+    group media mediadrm drmrpc system
+    ioprio rt 4
+    writepid /dev/cpuset/foreground/tasks
