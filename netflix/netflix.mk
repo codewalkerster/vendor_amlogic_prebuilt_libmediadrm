@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 
-PRODUCT_PROPERTY_OVERRIDES += ro.vendor.amlogic.mgkid_ta.version = "2.1"
+PRODUCT_PROPERTY_OVERRIDES += ro.vendor.amlogic.mgkid_ta.version = "2.2"
