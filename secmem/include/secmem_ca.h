@@ -200,6 +200,145 @@ unsigned int Secure_V2_PoolFlush(void *sess);
 unsigned int Secure_SetHandle(uint32_t handle);
 unsigned int Secure_GetHandle(uint32_t *handle);
 
+/**
+ * V3 API
+ */
+#define SECMEM_V3_FLAGS_TVP(x)          FLAG_(x, 0xF, 0)
+#define SECMEM_V3_FLAGS_CODEC(x)        FLAG_(x, 0xF, 4)
+#define SECMEM_V3_FLAGS_VD_INDEX(x)     FLAG_(x, 0xF, 9)
+#define SECMEM_V3_FLAGS_USAGE(x)        FLAG_(x, 0x7, 13)
+#define SECMEM_V3_FLAGS_MEM_LEVEL(x)    FLAG_(x, 0xF, 17)
+
+uint32_t Secure_V3_SessionCreate(void **sess);
+uint32_t Secure_V3_SessionDestroy(void **sess);
+uint32_t Secure_V3_Init(void *sess,
+        uint64_t source,
+        uint64_t flags,
+        uint64_t paddr,
+        uint64_t size);
+uint32_t Secure_V3_MemCreate(void *sess, uint64_t *handle);
+uint32_t Secure_V3_MemPeek(void *sess, uint64_t *handle);
+uint32_t Secure_V3_MemAlloc(void *sess,
+        uint64_t handle,
+        uint64_t size,
+        uint64_t *phyaddr);
+uint32_t Secure_V3_MemToPhy(void *sess,
+        uint64_t handle,
+        uint64_t *phyaddr);
+uint32_t Secure_V3_MemFill(void *sess,
+        uint64_t handle,
+        uint64_t offset,
+        uint8_t *buffer,
+        uint64_t size);
+uint32_t Secure_V3_MemCopy(void *sess,
+        uint64_t out_handle,
+        uint64_t in_handle,
+        uint32_t ranges,
+        uint64_t dst_offset[],
+        uint64_t src_offset[],
+        uint64_t size[]);
+uint32_t Secure_V3_MemCopyPhy(uint64_t dst_handle,
+        uint64_t dst_offset,
+        uint64_t src_phyaddr,
+        uint64_t src_offset,
+        uint64_t size);
+uint32_t Secure_V3_MemCheck(void *sess,
+        uint64_t handle,
+        uint8_t *buffer,
+        uint64_t len);
+uint32_t Secure_V3_MemExport(void *sess,
+        uint64_t handle,
+        int *fd,
+        uint64_t *maxsize);
+uint32_t Secure_V3_MemAllocDMA(void *sess,
+        uint64_t size,
+        int *fd,
+        uint64_t *handle,
+        uint64_t *maxsize);
+uint32_t Secure_V3_FdToHandle(void *sess, int fd);
+uint32_t Secure_V3_FdToPaddr(void *sess, int fd);
+uint32_t Secure_V3_MemPop(void *sess);
+uint32_t Secure_V3_MemFree(void *sess, uint64_t handle);
+uint32_t Secure_V3_MemRelease(void *sess, uint64_t handle);
+uint32_t Secure_V3_MemFlush(void *sess);
+uint32_t Secure_V3_MemClear(void *sess);
+uint32_t Secure_V3_Statistic(void *sess,
+        uint8_t* buffer,
+        uint32_t size);
+uint32_t Secure_V3_ShowResourceUsage(uint8_t *buffer, uint32_t size);
+uint32_t Secure_V3_SetCsdData(void*sess,
+        uint8_t *csd,
+        uint32_t csd_len);
+uint32_t Secure_V3_GetCsdDataDrmInfo(void *sess,
+        uint64_t src_csd_addr,
+        uint64_t csd_len,
+        uint64_t *store_csd_phyaddr,
+        uint64_t *store_csd_size,
+        uint64_t overwrite);
+uint32_t Secure_V3_GetPadding(void *sess,
+        uint64_t* pad_addr,
+        uint32_t *pad_size,
+        uint32_t pad_type);
+uint32_t Secure_V3_GetVp9HeaderSize(void *sess,
+        void *src,
+        uint64_t size,
+        uint64_t *header_size,
+        uint64_t *frames);
+uint32_t Secure_V3_MergeCsdDataDrmInfo(void *sess,
+        uint64_t *phyaddr,
+        uint32_t *csd_len);
+uint32_t Secure_V3_MergeCsdData(void *sess,
+        uint64_t handle,
+        uint64_t *csd_len);
+uint32_t Secure_V3_Parse(void *sess,
+        uint32_t type,
+        uint64_t handle,
+        uint8_t *buffer,
+        uint64_t size,
+        uint64_t *flag);
+uint32_t Secure_V3_ResourceAlloc(void *sess,
+        uint64_t* phyaddr,
+        uint64_t *size);
+uint32_t Secure_V3_ResourceFree(void *sess);
+uint32_t Secure_V3_BindTVP(void *sess, uint32_t cas_id);
+uint32_t Secure_V3_AudioValid(void *sess,
+        void *src, // secure source phyaddr
+        uint64_t size, //secure packet size
+        uint32_t aud_type, // audio format AUD_VALID_TYPE
+        uint8_t *aud_buf, // nonsecure output buf
+        uint64_t buf_max_size); // aud_buf total size
+uint32_t Secure_V3_GetSecmemSize(void *sess,
+        uint64_t *mem_capacity,
+        uint64_t *mem_available,
+        uint32_t *handle_capacity,
+        uint32_t *handle_available);
+uint32_t Secure_V3_InitSecurePool(void *sess,
+        uint64_t vd_index,
+        uint64_t usage,
+        uint64_t flags,
+        int fd);
+uint32_t Secure_V3_EnableTVPMemory(void *sess, uint64_t flags);
+uint32_t Secure_V3_DestroySecurePool(void *sess);
+uint32_t Secure_V3_UpdateFrameInfo(void *sess,
+        uint32_t codec,
+        int fd,
+        uint64_t flags,
+        uint64_t *size);
+uint32_t Secure_V3_GetFreeBlockCount(void *sess,
+        int fd,
+        uint64_t frame_size,
+        uint32_t *block_count,
+        uint32_t *block_free_count);
+uint32_t Secure_V3_PoolFlush(void *sess);
+uint32_t Secure_V3_GetVersion(void);
+uint32_t Secure_V3_GetResourceAddressAndSize(uint64_t *resource_address, uint32_t *resource_size);
+
+/*
+ * Sideband API
+ */
+uint32_t Secure_V3_SetHandle(uint64_t handle);
+uint32_t Secure_V3_GetHandle(uint64_t *handle);
+
 /*
  * Dsc API
  */

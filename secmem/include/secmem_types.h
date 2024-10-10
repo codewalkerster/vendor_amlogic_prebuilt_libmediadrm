@@ -33,6 +33,12 @@ enum {
 };
 
 enum {
+    SECMEM_V3_MEM_SOURCE_NONE                          = 0,
+    SECMEM_V3_MEM_SOURCE_VDEC,
+    SECMEM_V3_MEM_SOURCE_CODEC_MM
+};
+
+enum {
     SECMEM_TVP_TYPE_NONE                               = 0,
     SECMEM_TVP_TYPE_FHD,
     SECMEM_TVP_TYPE_UHD,
@@ -51,6 +57,13 @@ enum {
     SECMEM_V2_USAGE_CAS_LIVE,
     SECMEM_V2_USAGE_CAS_RECORD,
     SECMEM_V2_USAGE_CAS_REPLAY
+};
+
+enum {
+    SECMEM_V3_USAGE_DRM_PLAYBACK                       = 0,
+    SECMEM_V3_USAGE_CAS_LIVE,
+    SECMEM_V3_USAGE_CAS_RECORD,
+    SECMEM_V3_USAGE_CAS_REPLAY
 };
 
 enum {
