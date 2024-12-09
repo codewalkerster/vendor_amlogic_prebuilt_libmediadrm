@@ -8,6 +8,7 @@
     "useSingleMetadata": true,
     "provisionUrl": "default",
     "provisionKey": "default",
-    "licenseUrl": "default"
+    "licenseUrl": "default",
+    "pvrScramblingMode": 14
   }
 }
