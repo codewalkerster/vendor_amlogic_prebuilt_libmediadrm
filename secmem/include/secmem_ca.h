@@ -194,6 +194,25 @@ unsigned int Secure_V2_GetFreeBlockCount(void *sess,
                             uint32_t *block_free_count);
 unsigned int Secure_V2_PoolFlush(void *sess);
 
+unsigned int Secure_V2_ProbeProgram(void *sess,
+                            uint32_t handle,
+                            uint32_t size,
+                            uint32_t* program_count,     // Input the number of buffers and output the actual number of programs
+                            sec_ts_program_t* program_list);
+
+unsigned int Secure_V2_GetStreamInfo(void *sess,
+                            uint32_t handle,
+                            uint32_t size,
+                            uint32_t* program_pid,      // input and output
+                            uint32_t* stream_count,     // Input the number of buffers and output the actual number of streams
+                            sec_ts_component_t* stream_list);
+
+unsigned int Secure_V2_FindPtsOffset(void *sess,
+                            uint32_t handle,
+                            uint32_t size,
+                            uint64_t* pts,              // input and output
+                            uint32_t stream_type,
+                            int32_t* offset);
 /*
  * Sideband API
  */
@@ -211,6 +230,7 @@ unsigned int Secure_GetHandle(uint32_t *handle);
 
 uint32_t Secure_V3_SessionCreate(void **sess);
 uint32_t Secure_V3_SessionDestroy(void **sess);
+uint32_t Secure_V3_Enforcement(void *sess, uint32_t *enforcement);
 uint32_t Secure_V3_Init(void *sess,
         uint64_t source,
         uint64_t flags,
@@ -332,6 +352,26 @@ uint32_t Secure_V3_GetFreeBlockCount(void *sess,
 uint32_t Secure_V3_PoolFlush(void *sess);
 uint32_t Secure_V3_GetVersion(void);
 uint32_t Secure_V3_GetResourceAddressAndSize(uint64_t *resource_address, uint32_t *resource_size);
+
+uint32_t Secure_V3_ProbeProgram(void *sess,
+                            uint64_t handle,
+                            uint64_t size,
+                            uint32_t* program_count,     // Input the number of buffers and output the actual number of programs
+                            sec_ts_program_t* program_list);
+
+uint32_t Secure_V3_GetStreamInfo(void *sess,
+                            uint64_t handle,
+                            uint64_t size,
+                            uint32_t* program_pid,      // input and output
+                            uint32_t* stream_count,     // Input the number of buffers and output the actual number of streams
+                            sec_ts_component_t* stream_list);
+
+uint32_t Secure_V3_FindPtsOffset(void *sess,
+                            uint64_t handle,
+                            uint64_t size,
+                            uint64_t* pts,              // input and output
+                            uint32_t stream_type,
+                            int32_t* offset);
 
 /*
  * Sideband API

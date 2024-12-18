@@ -42,7 +42,8 @@ enum {
     SECMEM_TVP_TYPE_NONE                               = 0,
     SECMEM_TVP_TYPE_FHD,
     SECMEM_TVP_TYPE_UHD,
-    SECMEM_TVP_TYPE_CUSTOM
+    SECMEM_TVP_TYPE_CUSTOM,
+    SECMEM_TVP_TYPE_CUSTOM_KB_UNIT
 };
 
 enum {
@@ -86,6 +87,7 @@ enum {
     SECMEM_ERROR_INVALID_CMD,
     SECMEM_ERROR_INVALID_PROP,
     SECMEM_ERROR_INVALID_MEM_LEVEL,
+    SECMEM_ERROR_BUFFER_TOO_SMALL,
     SECMEM_ERROR_MAX
 };
 
@@ -164,5 +166,15 @@ typedef struct {
     uint32_t kt_buf_len;
     uint8_t *kt_buf;
 } key_table_info;
+
+typedef struct sec_ts_program_s {
+    uint16_t            pid;
+    uint16_t            program_num;
+} sec_ts_program_t;
+
+typedef struct sec_ts_component_s {
+    uint16_t            pid;
+    uint16_t            stream_type;
+} sec_ts_component_t;
 
 #endif /*_SECMEM_TYPES_H_ */
