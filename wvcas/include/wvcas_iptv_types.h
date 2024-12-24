@@ -1,0 +1,98 @@
+#ifndef _WVCAS_IPTV_TYPES_H_
+#define _WVCAS_IPTV_TYPES_H_
+
+#include <stdbool.h>
+
+#define WVCAS_MAX_PRIVATE_DATA_SIZE 512
+#define WVCAS_MAX_SCRAMBLING_ES_NUM 32
+#define WVCAS_INVALID_CAS_HANDLE 0
+
+typedef size_t WvCasHandle;
+typedef size_t WvCasSessionHandle;
+
+typedef int (*WvCasCallback)(WvCasHandle handle, const char *json);
+typedef int (*WvCasSessionCallback)(WvCasSessionHandle sess_handle, const char *json);
+
+typedef enum {
+    WVCAS_OK,
+    WVCAS_ERROR,
+    WVCAS_ERROR_INIT_FAILED,
+    WVCAS_ERROR_MALLOC_FAILED,
+    WVCAS_ERROR_ILLEGAL_INPUT_PARAMETERS,
+    WVCAS_ERROR_NOT_IMPLEMENTED,
+    WVCAS_ERROR_RELEASE_CAS_PLUGIN_FAILED,
+    WVCAS_ERROR_RELEASE_DESCRAMBLER_FAILED,
+    WVCAS_ERROR_CREATE_CAS_PLUGIN_FAILED,
+    WVCAS_ERROR_PROVISION_FAILED,
+    WVCAS_ERROR_OPEN_SESSION_FAILED,
+    WVCAS_ERROR_SET_PRIVATE_DATA_FAILED,
+    WVCAS_ERROR_SET_SESSION_PRIVATE_DATA_FAILED,
+    WVCAS_ERROR_CLOSE_SESSION_FAILED,
+    WVCAS_ERROR_CREATE_DESCRAMBLER_FAILED,
+    WVCAS_ERROR_SET_KEY_TOKEN_FAILED,
+    WVCAS_ERROR_SET_DEMUX_SOURCE_FAILED,
+    WVCAS_ERROR_ADD_PID_FAILED,
+    WVCAS_ERROR_REMOVE_PID_FAILED,
+    WVCAS_ERROR_JSON_PARSE_FAILED,
+    WVCAS_ERROR_PROCESS_ECM_FAILED,
+    WVCAS_UNKNOWN_ERROR,
+} WvCasResult;
+
+typedef enum {
+    WVCAS_USE_CASE_BACKGROUND = 100,
+    WVCAS_USE_CASE_SCAN = 200,
+    WVCAS_USE_CASE_PLAYBACK = 300,
+    WVCAS_USE_CASE_LIVE = 400,
+    WVCAS_USE_CASE_RECORD = 500,
+} WvCasUseCase;
+
+typedef enum {
+    WVCAS_SESSION_USAGE_LIVE,
+    WVCAS_SESSION_USAGE_PLAYBACK,
+    WVCAS_SESSION_USAGE_RECORD,
+    WVCAS_SESSION_USAGE_TIMESHIFT,
+} WvCasSessionUsage;
+
+typedef enum {
+    WVCAS_SCRAMBLING_MODE_RESERVED = 0,
+    WVCAS_SCRAMBLING_MODE_DVB_CSA1,
+    WVCAS_SCRAMBLING_MODE_DVB_CSA2,
+    WVCAS_SCRAMBLING_MODE_DVB_CSA3_STANDARD,
+    WVCAS_SCRAMBLING_MODE_DVB_CSA3_MINIMAL,
+    WVCAS_SCRAMBLING_MODE_DVB_CSA3_ENHANCE,
+    WVCAS_SCRAMBLING_MODE_DVB_CISSA_V1,
+    WVCAS_SCRAMBLING_MODE_DVB_IDSA,
+    WVCAS_SCRAMBLING_MODE_MULTI2,
+    WVCAS_SCRAMBLING_MODE_AES128,
+    WVCAS_SCRAMBLING_MODE_AES_ECB,
+    WVCAS_SCRAMBLING_MODE_AES_SCTE52,
+    WVCAS_SCRAMBLING_MODE_TDES_ECB,
+    WVCAS_SCRAMBLING_MODE_TDES_SCTE52,
+    WVCAS_SCRAMBLING_MODE_AES_CBC,
+} WvCasScramblingMode;
+
+typedef struct {
+    int ca_system_id;
+    int plugin_idx;
+    WvCasUseCase use_case;
+    WvCasCallback plugin_cb;
+    WvCasSessionCallback session_cb;
+} WvCasPluginInfo;
+
+typedef struct {
+    WvCasPluginInfo plugin_info;
+    WvCasSessionUsage session_usage;
+    WvCasScramblingMode scrambling_mode;
+} WvCasSessionInfo;
+
+typedef struct {
+    uint32_t dmx_dev_id;
+    uint32_t dsc_dev_id;
+    uint16_t ecm_pid;
+    uint16_t es_pids[WVCAS_MAX_SCRAMBLING_ES_NUM];
+    uint32_t es_pid_num;
+    uint8_t private_data[WVCAS_MAX_PRIVATE_DATA_SIZE];
+    int private_data_len;
+} WvCasScramblingInfo;
+
+#endif
