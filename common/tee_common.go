@@ -50,6 +50,8 @@ func SetProps(ctx android.LoadHookContext, props *Props, info Information) {
         tdk_ver = "v3.8.0"
     } else if tdk_ver == "TDK318" {
         tdk_ver = "v3.18.0"
+    } else if tdk_ver == "TDK44" {
+        tdk_ver = "v4.4.0"
     } else {
         tdk_ver = "v3.8.0"
         fmt.Printf("tek_ver not exist, use TDK38\n")
