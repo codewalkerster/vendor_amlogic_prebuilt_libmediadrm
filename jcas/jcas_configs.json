@@ -9,6 +9,8 @@
     "provisionUrl": "default",
     "provisionKey": "default",
     "licenseUrl": "default",
-    "pvrScramblingMode": 14
+    "pvrScramblingMode": 14,
+    "opVaultUrl": "default",
+    "createDefaultCasWrapper": true
   }
 }
