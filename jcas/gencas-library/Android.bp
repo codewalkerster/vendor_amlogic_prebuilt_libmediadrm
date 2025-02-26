@@ -27,6 +27,12 @@ java_import {
     sdk_version: "current",
 }
 
+java_import {
+    name: "jcas-verimatrix-library",
+    jars: ["libs/jcas-verimatrix-library.jar"],
+    sdk_version: "current",
+}
+
 java_library {
     name: "jcas-builder-library",
 
@@ -48,6 +54,7 @@ java_library {
         "jcas-base-library",
         "jcas-library",
         "jcas-widevine-library",
+        "jcas-verimatrix-library",
     ],
 
     required: [

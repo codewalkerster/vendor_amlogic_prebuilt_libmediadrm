@@ -5,6 +5,9 @@ import static com.droidlogic.jcas.CasManager.EMM_FILTERING_ON_TUNE;
 import com.droidlogic.jcas.vendor.widevine.WidevineCasProjectListener;
 import com.droidlogic.jcas.vendor.widevine.WidevineCasWrapperFactory;
 
+import com.droidlogic.jcas.vendor.verimatrix.VerimatrixCasProjectListener;
+import com.droidlogic.jcas.vendor.verimatrix.VerimatrixCasWrapperFactory;
+
 /**
  * A factory class containing method for creating a JCas for the current platform
  */
@@ -15,7 +18,10 @@ public class JCasBuilder {
      * 'WidevineCasWrapperFactory' to '{vendor}CasWrapperFactory'
      */
     public static CasWrapperFactory[] createFactory(String config) {
-        return new CasWrapperFactory[]{new WidevineCasWrapperFactory(config)};
+        return new CasWrapperFactory[] {
+            new WidevineCasWrapperFactory(config),
+            new VerimatrixCasWrapperFactory()
+        };
     }
 
     /**
