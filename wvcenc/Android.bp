@@ -36,6 +36,10 @@ liboemcrypto_go_defaults {
     name: "liboemcrypto_bp_module",
 }
 
+liboemcrypto_atsc_go_defaults {
+    name: "liboemcrypto_atsc_bp_module",
+}
+
 cc_prebuilt_library_shared {
     name: "liboemcrypto",
     compile_multilib: "both",
@@ -51,5 +55,25 @@ cc_prebuilt_library_shared {
         "libteec",
         "libutils",
         "libz"
+    ],
+}
+
+cc_prebuilt_library_shared {
+    name: "liboemcrypto_atsc",
+    compile_multilib: "both",
+    defaults: ["liboemcrypto_atsc_bp_module"],
+    strip: {
+        none: true,
+    },
+    proprietary: true,
+    shared_libs: [
+        "libbase",
+        "libbinder_ndk",
+        "libcrypto",
+        "libcutils",
+        "libdl",
+        "libutils",
+        "libprotobuf-cpp-lite",
+        "liblog"
     ],
 }
