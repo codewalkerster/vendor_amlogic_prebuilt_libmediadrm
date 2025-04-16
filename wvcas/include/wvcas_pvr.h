@@ -65,27 +65,23 @@ WvCasPVRResult WVCAS_RemovePVRPid(
  * @brief   Get the WVCAS PVR metadata.
  * @param   pvr_session: The WVCAS PVR session handle.
  * @param   metadata: The WVCAS PVR metadata.
- * @param   metadata_size: The WVCAS PVR metadata size.
  * @retval  WVCAS_PVR_OK if function succeeds.
  *          WVCAS_PVR_ERROR or other abnormal return values
  *          defined in WvCasPVRResult if some exception occurs.
  */
 WvCasPVRResult WVCAS_GetPVRMetadata(
-            WvCasPVRHandle pvr_session, WvCasPVRMetadata *metadata,
-            WvCasPVRSize* metadata_size);
+            WvCasPVRHandle pvr_session, WvCasPVRMetadata *metadata);
 
 /**
  * @brief   Load the WVCAS PVR metadata.
  * @param   pvr_session: The WVCAS PVR session handle.
  * @param   metadata: The WVCAS PVR metadata.
- * @param   metadata_size: The WVCAS PVR metadata size.
  * @retval  WVCAS_PVR_OK if function succeeds.
  *          WVCAS_PVR_ERROR or other abnormal return values
  *          defined in WvCasPVRResult if some exception occurs.
  */
 WvCasPVRResult WVCAS_LoadPVRMetadata(
-            WvCasPVRHandle pvr_session, WvCasPVRMetadata *metadata,
-            WvCasPVRSize metadata_size);
+            WvCasPVRHandle pvr_session, WvCasPVRMetadata *metadata);
 
 /**
  * @brief   Update the WVCAS PVR info.
