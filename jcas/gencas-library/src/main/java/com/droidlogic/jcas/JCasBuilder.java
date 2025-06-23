@@ -20,7 +20,7 @@ public class JCasBuilder {
     public static CasWrapperFactory[] createFactory(String config) {
         return new CasWrapperFactory[] {
             new WidevineCasWrapperFactory(config),
-            new VerimatrixCasWrapperFactory()
+            new VerimatrixCasWrapperFactory(config)
         };
     }
 
