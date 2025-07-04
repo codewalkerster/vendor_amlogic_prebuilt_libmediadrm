@@ -15,7 +15,6 @@ android {
         //targetSdkVersion 34
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -46,6 +45,7 @@ dependencies {
     implementation project(':jcas-base-library')
     implementation project(':jcas-library')
     implementation project(path: ':jcas-vendor-library:widevine')
+    implementation project(path: ':jcas-vendor-library:verimatrix')
     //implementation project(path: ':jcas-vendor-library:nagra')
     //implementation project(path: ':jcas-vendor-library:sample')
     //api fileTree(include: ['*.jar'], dir: 'libs')
@@ -80,6 +80,7 @@ task releaseJar(type: Jar) {
     from(project.zipTree("${gradle.ext.outputDir}/${JCasBaseJarName}.jar"))
     from(project.zipTree("${gradle.ext.outputDir}/${JCasJarName}.jar"))
     from(project.zipTree("${gradle.ext.outputDir}/${JCasWidevineJarName}.jar"))
+    from(project.zipTree("${gradle.ext.outputDir}/${JCasVerimatrixJarName}.jar"))
     from(project.zipTree("${gradle.ext.outputDir}/${SiPsiJarName}.jar"))
     from(project.zipTree("${gradle.ext.outputDir}/${TunerJarName}.jar"))
     from(project.zipTree("${gradle.ext.outputDir}/${CommonJarName}.jar"))

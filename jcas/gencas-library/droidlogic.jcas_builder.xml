@@ -16,5 +16,5 @@
 <permissions>
 	<library name="jcas-builder-library"
 		file="/vendor/framework/jcas-builder-library.jar"
-		dependency="jcas-base-library:jcas-library:jcas-widevine-library"/>
+		dependency="jcas-base-library:jcas-library:jcas-widevine-library:jcas-verimatrix-library"/>
 </permissions>
